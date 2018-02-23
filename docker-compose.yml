@@ -14,8 +14,6 @@ services:
     ports:
       - '80:80'
       - '443:443'
-    volumes:
-      - '/path/to/magang_data:/var/www/html'
     depends_on:
       - mariadb
 volumes:
