@@ -8,7 +8,7 @@ services:
       - '/path/to/mahara_mariadb_data:/var/lib/mysql'
   magang:
     build:
-      context: ../
+      context: ./
       dockerfile: Dockerfile
     image: 'ramani/magang:latest'
     ports:

@@ -16,7 +16,7 @@ RUN sudo apt-get install -y language-pack-en-base
 
 RUN sudo LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php; apt-get update && apt-get install php7.1 -y apache2 php7.1-mbstring phpmyadmin
 
-COPY ../* /var/www/html
+COPY . /var/www/html
 
 RUN cp /var/www/html/.env.example /var/www/html/.env
 
@@ -29,4 +29,4 @@ RUN sed 's/DB_CONNECTION=/DB_CONNECTION=$DB_CONNECTION/g' --in-place /var/www/ht
 
 EXPOSE 80 443
 
-CMD ['apachectl -d /var/www/html -f /etc/apache2/apache2.conf -e info -DFOREGROUND']
+CMD ['/usr/sbin/apachectl -d /var/www/html -f /etc/apache2/apache2.conf -e info -DFOREGROUND']
