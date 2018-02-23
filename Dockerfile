@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install software-properties-common wget curl wget 
 
 RUN sudo apt-get install -y language-pack-en-base
 
-RUN sudo LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php; apt-get update && apt-get install php7.1 -y apache2 php7.1-mbstring phpmyadmin
+RUN sudo LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php; apt-get update && apt-get install php7.1 -y apache2 php7.1-mbstring # phpmyadmin
 
 COPY . /var/www/html
 
