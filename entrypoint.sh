@@ -1,5 +1,8 @@
 #!/bin/bash
 
+ROOT_PROJECT=/var/www/html
+
+cd $ROOT_PROJECT
 echo ""
 echo "load configuration"
 source .env
@@ -19,6 +22,7 @@ if [ $STATS -gt 0 ]; then
 	mysql -u root -h mariadb -e "GRANT ALL PRIVILEGES ON \`$DB_USERNAME\`.* TO '$DB_USERNAME'@'%' IDENTIFIED BY '$DB_PASSWORD';"
 	mysql -u root -h mariadb -e "FLUSH PRIVILEGES;"
 
+        cd $ROOT_PROJECT
 	echo ""
 	echo "run composer for first time"
 	composer install
