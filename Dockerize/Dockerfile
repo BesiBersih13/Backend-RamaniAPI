@@ -1,0 +1,24 @@
+FROM ubuntu:14.04
+
+MAINTAINER alfin hidayat <kahid.na@gmail.com>
+
+RUN apt-get update && apt-get install software-properties-common wget curl wget nano unzip -y
+
+RUN sudo apt-get install -y language-pack-en-base
+
+RUN sudo LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php; apt-get update && apt-get install php7.1 -y apache2 php7.1-mbstring phpmyadmin
+
+COPY ../* /var/www/html
+
+RUN cp /var/www/html/.env.example /var/www/html/.env
+
+RUN sed 's/DB_CONNECTION=/DB_CONNECTION=mysql/g' --in-place /var/www/html/.env; \
+	sed 's/DB_HOST=/DB_HOST=mariadb/g' --in-place /var/www/html/.env; \
+	sed 's/DB_PORT=/DB_PORT=3306/g' --in-place /var/www/html/.env; \
+	sed 's/DB_DATABASE=/DB_DATABASE=magang/g' --in-place /var/www/html/.env; \
+	sed 's/DB_USERNAME=/DB_USERNAME=root/g' --in-place /var/www/html/.env; \
+	sed 's/DB_PASSWORD=/DB_PASSWORD=magang123/g' --in-place /var/www/html/.env;
+
+EXPOSE 80 443
+
+CMD ['apachectl -d /var/www/html -f /etc/apache2/apache2.conf -e info -DFOREGROUND']
